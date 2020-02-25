@@ -3,6 +3,7 @@
 
 1. PlotAnalysis.ipynb: notebook con analisis de resultados parciales.
 2. CheckBucket.ipynb: Notebook que muestra resultados de como se evidencian las cubetas (en construccion).
+3. Plots_LSH.ipynb: grafica las "geometrias" de los metodos.
 
 la carpeta `originales` contiene los resultados "raw" de todos los experimentos
 
