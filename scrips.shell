@@ -1,0 +1,24 @@
+nohup spark-submit --driver-memory 12G \
+--executor-memory 20G \
+--conf spark.dynamicAllocation.enabled=false \
+--conf spark.network.timeout=4800 \
+--conf spark.sql.legacy.allowCreatingManagedTableUsingNonemptyLocation=true \
+--num-executors 18 \
+--class "com.org.udea.runners.RunIsLshRf" lsh-analysis_2.11-2.3.0_0.4.3.jar \
+-I db_fraud_legal_p2p \
+-p 144 \
+-J jsons/categoryMapsNoMon.json \
+-L 1,0 \
+-o p2p_for_complete \
+-C 1 \
+-k  5 \
+-S 2 \
+-t 10,25,50 \
+-d 10,20,30 \
+-A 10 \
+-O 1 \
+-B 1 \
+-l hyperplanes,hyperplanes-projection,projection \
+-z entropy -s 0.1 \
+-n 4 -m 1000 -D 6 \
+-N 0 >p2p_for_complete_drop3 2>&1&
