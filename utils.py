@@ -39,24 +39,30 @@ def get_best_for(g, measures = None, measure_sort = 'F1', ascending=False, facto
     test = test[test['type'] == 'test']
     best = test.groupby(factorsModel)[measures].mean()
     best.sort_values(by = measure_sort, ascending = ascending, inplace= True)
-    if (debug):
-        print(best.head(1))
     params = best.head(1).copy().reset_index()[factorsModel].to_dict('records')[0]
-    params_train = params
-    params_test = params
+    params_train = params.copy()
+    params_test = params.copy()
     params_train['type'] = 'train'
-    params_test['type'] = 'test'    
-    train = g.loc[(g[list(params)] == pd.Series(params)).all(axis=1)].copy()
-    test = g.loc[(g[list(params)] == pd.Series(params)).all(axis=1)].copy()
+    params_test['type'] = 'test'
+    if (debug):
+        print("parameters", params)
+    train = g.loc[(g[list(params_train)] == pd.Series(params_train)).all(axis=1)].copy()
+    test = g.loc[(g[list(params_test)] == pd.Series(params_test)).all(axis=1)].copy()
     if agg:
         tr_best = train.groupby(factorsModel)[measures].mean().sort_values(by = measure_sort, ascending = ascending, inplace= False) 
         tr_best['type'] = 'train'
+        if (debug):
+            print(best.head(1))
+            print(tr_best.head(1))
         return(pd.concat([best.head(1), tr_best.head(1)]))
     else:
         train = train.loc[:, factorsModel+ measures]
         train['type'] = 'train'
         test = test.loc[:, factorsModel+ measures]
         test['type'] = 'test'
+        if (debug):
+            print("test \n", test.shape)
+            print("train \n",train.shape)
         return(pd.concat([train, test], ignore_index=True, axis = 0))
 
 def increase_lw(g, lw = 2.8):
