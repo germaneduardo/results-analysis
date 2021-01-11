@@ -56,9 +56,9 @@ def get_best_for(g, measures = None, measure_sort = 'F1', ascending=False, facto
             print(tr_best.head(1))
         return(pd.concat([best.head(1), tr_best.head(1)]))
     else:
-        train = train.loc[:, factorsModel+ measures]
+        train = train.loc[:, factorsModel+ measures + ['k']]
         train['type'] = 'train'
-        test = test.loc[:, factorsModel+ measures]
+        test = test.loc[:, factorsModel+ measures+ ['k']]
         test['type'] = 'test'
         if (debug):
             print("test \n", test.shape)
