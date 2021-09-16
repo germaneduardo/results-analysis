@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/home/german/venv/general/bin/python"
+    "python.pythonPath": "/home/german/venv/general/bin/python",
+    "jupyter.jupyterServerType": "local"
 }
