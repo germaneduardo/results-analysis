@@ -1,0 +1,6 @@
+ipykernel
+seaborn
+pandas
+matplotlib
+openpyxl
+statsmodels
